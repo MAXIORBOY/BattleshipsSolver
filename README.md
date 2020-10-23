@@ -5,7 +5,7 @@ The rules of the game:
 * The game takes place at a 10x10 grid.
 * The ships can be placed horizontally or vertically.
 * The ships can be placed next to each other but they cannot overlap.
-* After shot it must be stated whether the shot: missed, hit or hit and sank the ship. It must be stated which ship sank. 
+* After shot it must be stated whether the shot: missed, hit or hit and sank the ship. It must be stated which ship was sunk. 
 * There are 5 ships:
   * Carrier - 5 squares
   * Battleship - 4 squares
