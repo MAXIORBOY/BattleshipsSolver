@@ -161,14 +161,13 @@ class Battleships:
         return f'{self.row_dictionary[decision[0]]}{self.column_dictionary[decision[1]]}'
 
     def run(self, iteration=1):
-        def check_user_input(window, decision_, status_, sunken_ship_, iteration_):
+        def check_user_input(decision_, status_, sunken_ship_, iteration_):
             if status_ == '':
                 tk.messagebox.showerror('Error!', 'Response field is empty!')
             elif status_ == 'Hit & Sunk' and sunken_ship_ == '':
                 tk.messagebox.showerror('Error!', 'Please select which ship has been sunk!')
             else:
-                window.quit()
-                window.destroy()
+                quit_program()
                 finish_turn(decision_, status_, sunken_ship_, iteration_)
 
         def finish_turn(decision_, status_, sunken_ship_, iteration_):
@@ -185,9 +184,16 @@ class Battleships:
             else:
                 sunken_ship.set("")
                 combo_box_sunken_ship.config(state="disabled")
+
+        def quit_program():
+            plt.close()
+            root.quit()
+            root.destroy()
             
         root = tk.Tk()
+        root.protocol("WM_DELETE_WINDOW", quit_program)
         root.title('Battleships')
+        decision = None
 
         tk.Label(root, text='Battleships', font=font.Font(family='Helvetica', size=14, weight='bold')).pack()
         if any(self.sm_object.ship_status.values()):
@@ -217,19 +223,19 @@ class Battleships:
             frame.pack()
 
             tk.Label(root, text='').pack()
-            button = tk.Button(root, text='SEND', bd=4, font=font.Font(family='Helvetica', size=12, weight='normal'), command=lambda: [check_user_input(root, decision, status.get(), sunken_ship.get(), iteration)])
+            button = tk.Button(root, text='SEND', bd=4, font=font.Font(family='Helvetica', size=12, weight='normal'), command=lambda: [check_user_input(decision, status.get(), sunken_ship.get(), iteration)])
             button.pack()
         else:
             tk.Label(root, text=f'Round: {iteration-1}\n', font=font.Font(family='Helvetica', size=12, weight='normal')).pack()
 
-        canvas = FigureCanvasTkAgg(self.get_current_board_figure(), master=root)
+        canvas = FigureCanvasTkAgg(self.get_current_board_figure(decision), master=root)
         canvas.draw()
         canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
         self.window_config(root)
         tk.mainloop()
 
-    def get_current_board_figure(self, cell_dimension=0.1):
+    def get_current_board_figure(self, decision=None, cell_dimension=0.1):
         plt.clf()
         cells = np.array([['  ' for _ in range(self.sm_object.board_columns + 1)] for _ in range(self.sm_object.board_rows + 1)])
 
@@ -244,6 +250,8 @@ class Battleships:
         for occupied_field in self.sm_object.occupied_fields_coords:
             i, j = occupied_field
             cells[i+1, j+1] = 'X'
+        if decision is not None:
+            cells[decision[0] + 1, decision[1] + 1] = '+'
 
         current_board = plt.table(cells, loc='center', rowLoc='center', colLoc='center', cellLoc='center')
 
@@ -265,6 +273,8 @@ class Battleships:
         for occupied_field in self.sm_object.occupied_fields_coords:
             i, j = occupied_field
             cell_dict[i+1, j+1].get_text().set_color('red')
+        if decision is not None:
+            cell_dict[decision[0] + 1, decision[1] + 1].get_text().set_color('yellow')
 
         current_board.auto_set_font_size(False)
         current_board.set_fontsize(20)
@@ -279,6 +289,7 @@ class Battleships:
     @staticmethod
     def window_config(window, width_adjuster=0.85, height_adjuster=0.55):
         window.attributes('-topmost', 1)
+        window.update()
         window.attributes('-topmost', 0)
         window.focus_force()
         window.update()
