@@ -17,5 +17,10 @@ The rules of the game:
 * Launch the ```Main.py``` script.
 * An executable (.exe) version is available in the ```Release``` folder.
 
+## Technology:  
+* ```Python``` 3.8  
+* ```numpy``` 1.19.4  
+* ```matplotlib``` 3.3.2  
+
 ## Screenshot:
 ![Battleships screenshot](https://user-images.githubusercontent.com/71539614/99141902-0c44b280-2650-11eb-8f35-62915f9f4610.png)
