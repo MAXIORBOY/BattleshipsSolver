@@ -14,7 +14,8 @@ The rules of the game:
   * Destroyer - 2 squares  
   
 ## Launch:
-An executable (.exe) version is available in the Release folder
+* Launch the ```Main.py``` script
+* An executable (.exe) version is available in the ```Release``` folder
 
 ## Screenshot:
 ![Battleships screenshot](https://user-images.githubusercontent.com/71539614/99141902-0c44b280-2650-11eb-8f35-62915f9f4610.png)
