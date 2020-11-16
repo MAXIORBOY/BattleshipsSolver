@@ -1,6 +1,6 @@
-# Battleships Solver is a program in which the computer plays the game of the Battleships (The Sea Battle).
-In every turn the computer will make a decision. Then the operator must give a feedback to the machine.
+# Battleships Solver is a program in which the computer plays the game of the Battleships (The Sea Battle). In every turn the computer will make a decision. Then the operator must give a feedback to the machine.  
 
+## Rules:  
 The rules of the game:
 * The game takes place on a 10x10 grid.
 * The ships can be placed horizontally or vertically.
@@ -11,8 +11,10 @@ The rules of the game:
   * Battleship - 4 squares
   * Cruiser - 3 squares
   * Submarine - 3 squares
-  * Destroyer - 2 squares
+  * Destroyer - 2 squares  
   
+## Launch:
 An executable (.exe) version is available in the Release folder
 
+## Screenshot:
 ![Battleships screenshot](https://user-images.githubusercontent.com/71539614/99141902-0c44b280-2650-11eb-8f35-62915f9f4610.png)
